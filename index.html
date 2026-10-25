@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#ffdde1">
+<title>Minh Ngọc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Mali:wght@500;700&family=Titan+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css?v=3">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+</head>
+<body>
+<audio id="bgm" loop preload="auto">
+  <source src="./Happy Birthday Remix 2020 - Hot Tiktok của Heineken.mp3" type="audio/mpeg">
+  <source src="./music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music" id="music" aria-label="Nhạc">
+  <i class="fa-solid fa-compact-disc"></i>
+</button>
+
+<canvas id="scene3d" aria-hidden="true"></canvas>
+
+<main id="wrapper">
+  <div class="flag l" data-fx="sway"><img src="./images/1.png" alt=""></div>
+  <div class="flag r" data-fx="sway"><img src="./images/1.png" alt=""></div>
+
+  <section class="content" id="stage">
+    <div class="left">
+      <h1 class="title" id="title3d" aria-label="Happy Birthday">
+        <span class="row happy" data-t="Happy" aria-hidden="true"></span>
+        <span class="row bday" data-t="Birthday" aria-hidden="true"></span>
+        <img class="hat" data-fx="hat" src="./images/hat.png" alt="">
+      </h1>
+
+      <div class="pill date" data-fx="jelly">
+        <i class="fa-solid fa-star"></i>
+        <span id="date" class="tw"></span>
+        <i class="fa-solid fa-star"></i>
+      </div>
+
+      <div class="cta">
+        <button class="btn" id="open">
+          <span>Ấn vào đây nè Ngọc ơiii</span>
+          <i class="fa-regular fa-envelope"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="box" id="box">
+        <svg class="morph-svg" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <linearGradient id="liqGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff6b8b"/>
+              <stop offset="50%" stop-color="#ffa87a"/>
+              <stop offset="100%" stop-color="#c490ff"/>
+            </linearGradient>
+          </defs>
+          <path id="blobPath1" class="blob-back" fill="url(#liqGrad)"></path>
+          <path id="blobPath2" class="blob-mid" fill="url(#liqGrad)"></path>
+        </svg>
+
+        <div class="orbit-ring" aria-hidden="true"></div>
+
+        <div class="avatar-wrap" id="avatar" data-fx="morph">
+          <div class="avatar">
+            <img src="https://i.pinimg.com/474x/bf/d1/1c/bfd11ccafab79434c92931fceb93f89a.jpg" alt="Minh Ngọc">
+            <div class="glare" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="pill name" data-fx="jelly">
+          <i class="fa-solid fa-heart"></i>
+          <span>Minh Ngọc</span>
+          <i class="fa-solid fa-heart"></i>
+        </div>
+
+        <button class="balloon b1" data-fx="pop" data-c="#ffa6a6" aria-label="Bóng bay">
+          <img src="./images/balloon1.png" alt="">
+        </button>
+        <button class="balloon b2" data-fx="pop" data-c="#ff6f7d" aria-label="Bóng bay">
+          <img src="./images/balloon2.png" alt="">
+        </button>
+      </div>
+
+      <div class="badge" data-fx="spin">
+        <div class="ring" id="ring"></div>
+        <i class="fa-solid fa-heart"></i>
+      </div>
+    </div>
+  </section>
+
+  <i class="deco star s1" data-fx="twinkle" style="--d:1.8s"></i>
+  <i class="deco star s2" data-fx="twinkle" style="--d:1.9s"></i>
+  <i class="deco star s3" data-fx="twinkle" style="--d:2.0s"></i>
+  <i class="deco star s4" data-fx="twinkle" style="--d:2.1s"></i>
+  <i class="deco star s5" data-fx="twinkle" style="--d:2.2s"></i>
+  <img class="deco fl f1" data-fx="spin" style="--d:1.8s" src="./images/decorate_flower.png" alt="">
+  <img class="deco fl f2" data-fx="spin" style="--d:2.0s" src="./images/decorate_flower.png" alt="">
+  <img class="deco fl f3" data-fx="spin" style="--d:2.2s" src="./images/decorate_flower.png" alt="">
+  <img class="deco blob" data-fx="jelly" style="--d:1.7s" src="./images/decorate.png" alt="">
+  <button class="deco smile" data-fx="wiggle" style="--d:1.9s" aria-label="Cười">
+    <img src="./images/smiley_icon.png" alt="">
+  </button>
+</main>
+
+<div id="fx" aria-hidden="true"></div>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="book-stage" id="bookStage">
+    <div class="book" id="book">
+      <div class="cover-leaf" id="coverLeaf">
+        <div class="cover-face cover-front">
+          <div class="cover-frame">
+            <img class="cover-emblem" id="coverEmblem" src="./images/heart_letter.png" alt="">
+          </div>
+          <div class="cover-shine"></div>
+        </div>
+        <div class="cover-face cover-back">
+          <div class="cover-back-pattern"></div>
+        </div>
+      </div>
+
+      <div class="card-base" id="cardBase">
+        <div class="page-shadow" id="pageShadow"></div>
+        <div class="paper">
+          <img class="stamp pop-item" data-fx="jelly" data-z="36" src="./images/love.png" alt="">
+          <h2 class="ltitle" id="ltitle">
+            <span id="lt" class="tw"></span>
+            <i class="fa-solid fa-heart" data-fx="jelly"></i>
+          </h2>
+          <div class="cols">
+            <div class="lcol">
+              <div class="polaroid pop-item" data-fx="jelly" data-z="44">
+                <img id="bunny" src="https://media.giphy.com/media/YKUvclrGYmDKXwtphf/giphy.gif" alt="">
+              </div>
+              <img class="h h1 pop-item" data-fx="twinkle" data-z="64" src="./images/heart.png" alt="">
+              <img class="h h2 pop-item" data-fx="twinkle" data-z="58" src="./images/heart.png" alt="">
+              <img class="h h3 pop-item" data-fx="twinkle" data-z="70" src="./images/heart.png" alt="">
+              <img class="h h4 pop-item" data-fx="twinkle" data-z="52" src="./images/heart.png" alt="">
+            </div>
+            <div class="rcol">
+              <img class="duo pop-item" data-fx="wiggle" data-z="38" src="https://media.giphy.com/media/m85llaN7ZkFIHtURiC/giphy.gif" alt="">
+              <p id="ltext" class="tw"></p>
+              <img class="mew pop-item" data-fx="wiggle" data-z="48" src="./images/mewmew.gif" alt="">
+            </div>
+          </div>
+        </div>
+        <button class="close" id="close" aria-label="Đóng">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATE = "23-10-2009";
+const TITLE = "Gửi Ngọc";
+const TEXT = "Happy Birthday Ngọc 🎉 Chúc Ngọc bước sang tuổi mới luôn xinh xắn, vui tươi và sớm đạt được những mục tiêu bản thân ấp ủ. Rất vui vì có một người bạn tuyệt vời và luôn mang năng lượng tích cực như Ngọc. Sinh nhật thật ấm áp và ngập tràn niềm vui nha!";
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const seg = s => window.Intl && Intl.Segmenter ? [...new Intl.Segmenter("vi", {granularity: "grapheme"}).segment(s)].map(x => x.segment) : Array.from(s);
+
+function prep(el, str) {
+  el.textContent = "";
+  return seg(str).map(c => {
+    const s = document.createElement("span");
+    s.textContent = c;
+    el.append(s);
+    return s;
+  });
+}
+
+$$("[data-t]").forEach(el => {
+  el.innerHTML = [...el.dataset.t].map((c, i) => `<b style="--i:${i}"><i>${c}</i></b>`).join("");
+});
+$("#ring").innerHTML = [..."happy-birthday-"].map((c, i) => `<b style="--i:${i}">${c}</b>`).join("");
+
+const blob1 = $("#blobPath1"), blob2 = $("#blobPath2");
+let morphTick = 0, morphBoost = 0;
+
+function buildSmoothBlob(cx, cy, baseR, amp, phase, points = 8) {
+  const pts = [];
+  for (let i = 0; i < points; i++) {
+    const ang = (i / points) * Math.PI * 2;
+    const r = baseR + Math.sin(ang * 3 + phase) * amp + Math.cos(ang * 2 - phase * 1.3) * (amp * 0.7);
+    pts.push([cx + Math.cos(ang) * r, cy + Math.sin(ang) * r]);
+  }
+  let d = "";
+  const len = pts.length;
+  for (let i = 0; i < len; i++) {
+    const p0 = pts[(i - 1 + len) % len];
+    const p1 = pts[i];
+    const p2 = pts[(i + 1) % len];
+    const p3 = pts[(i + 2) % len];
+    if (i === 0) d += `M ${p1[0].toFixed(1)},${p1[1].toFixed(1)} `;
+    const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
+    const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
+    const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
+    const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
+    d += `C ${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)} `;
+  }
+  return d + "Z";
+}
+
+const canvas = $("#scene3d"), ctx2d = canvas.getContext("2d");
+let cw = innerWidth, ch = innerHeight, dpr = Math.min(window.devicePixelRatio || 1, 2);
+let targetRX = 0, targetRY = 0, curRX = 0, curRY = 0;
+
+function resizeCanvas() {
+  cw = innerWidth; ch = innerHeight;
+  canvas.width = cw * dpr;
+  canvas.height = ch * dpr;
+  ctx2d.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+resizeCanvas();
+addEventListener("resize", resizeCanvas);
+
+const bokeh = Array.from({length: 22}, () => ({
+  x: Math.random() * cw,
+  y: Math.random() * ch,
+  z: 0.3 + Math.random() * 0.9,
+  r: 7 + Math.random() * 15,
+  vy: -(0.3 + Math.random() * 0.6),
+  sway: Math.random() * Math.PI * 2,
+  hue: Math.random() > 0.5 ? "rgba(255,120,138," : "rgba(255,255,255,"
+}));
+
+const ribbons = Array.from({length: 18}, () => ({
+  x: Math.random() * cw,
+  y: Math.random() * ch,
+  z: 0.4 + Math.random() * 0.8,
+  w: 6 + Math.random() * 6,
+  h: 10 + Math.random() * 8,
+  vy: 0.4 + Math.random() * 0.7,
+  vx: (Math.random() - 0.5) * 0.5,
+  rot: Math.random() * Math.PI * 2,
+  vrot: (Math.random() - 0.5) * 0.04,
+  flip: Math.random() * Math.PI * 2,
+  vflip: 0.03 + Math.random() * 0.04,
+  col: ["#ff6b82", "#ffb36b", "#ffe08a", "#c490ff", "#ff8da1"][Math.random() * 5 | 0]
+}));
+
+function renderScene() {
+  ctx2d.clearRect(0, 0, cw, ch);
+
+  curRX += (targetRX - curRX) * 0.09;
+  curRY += (targetRY - curRY) * 0.09;
+  const root = document.documentElement;
+  root.style.setProperty("--rx", curRX.toFixed(2) + "deg");
+  root.style.setProperty("--ry", curRY.toFixed(2) + "deg");
+  root.style.setProperty("--gx", (50 + curRY * 2.4).toFixed(1) + "%");
+  root.style.setProperty("--gy", (50 - curRX * 2.4).toFixed(1) + "%");
+
+  morphTick += 0.032 + morphBoost;
+  morphBoost *= 0.92;
+  const amp = 7.5 + morphBoost * 42;
+  blob1.setAttribute("d", buildSmoothBlob(100, 100, 86, amp, morphTick, 8));
+  blob2.setAttribute("d", buildSmoothBlob(100, 100, 81, amp * 0.85, -morphTick * 1.2 + 1.4, 7));
+
+  for (const b of bokeh) {
+    b.y += b.vy * b.z;
+    b.sway += 0.02;
+    b.x += Math.sin(b.sway) * 0.4;
+    if (b.y < -30) { b.y = ch + 30; b.x = Math.random() * cw; }
+
+    const px = b.x + curRY * 1.6 * b.z;
+    const py = b.y - curRX * 1.6 * b.z;
+    const grad = ctx2d.createRadialGradient(px - b.r * 0.3, py - b.r * 0.3, 1, px, py, b.r);
+    grad.addColorStop(0, "rgba(255,255,255,0.85)");
+    grad.addColorStop(0.6, b.hue + "0.26)");
+    grad.addColorStop(1, b.hue + "0)");
+    ctx2d.fillStyle = grad;
+    ctx2d.beginPath();
+    ctx2d.arc(px, py, b.r, 0, Math.PI * 2);
+    ctx2d.fill();
+  }
+
+  for (const r of ribbons) {
+    r.y += r.vy * r.z;
+    r.x += r.vx + Math.sin(r.flip) * 0.35;
+    r.rot += r.vrot;
+    r.flip += r.vflip;
+    if (r.y > ch + 20) { r.y = -20; r.x = Math.random() * cw; }
+
+    const px = r.x + curRY * 1.4 * r.z;
+    const py = r.y - curRX * 1.4 * r.z;
+    ctx2d.save();
+    ctx2d.translate(px, py);
+    ctx2d.rotate(r.rot);
+    ctx2d.scale(1, Math.cos(r.flip));
+    ctx2d.fillStyle = r.col;
+    ctx2d.globalAlpha = 0.55;
+    ctx2d.beginPath();
+    ctx2d.roundRect(-r.w / 2, -r.h / 2, r.w, r.h, 2);
+    ctx2d.fill();
+    ctx2d.restore();
+  }
+
+  requestAnimationFrame(renderScene);
+}
+requestAnimationFrame(renderScene);
+
+const fx = $("#fx"), EMO = ["❤️", "💖", "✨", "🎀", "⭐", "🌸", "🫧"];
+
+function burst(x, y, n = 9) {
+  for (let i = 0; i < n; i++) {
+    const p = document.createElement("span");
+    const a = (Math.PI * 2 * i) / n + (Math.random() - 0.5) * 0.5;
+    const d = 36 + Math.random() * 64;
+    p.className = "p";
+    p.textContent = EMO[Math.random() * EMO.length | 0];
+    p.style.cssText = `left:${x}px;top:${y}px;font-size:${13 + Math.random() * 12}px`;
+    fx.append(p);
+    const dx = Math.cos(a) * d, dy = Math.sin(a) * d;
+    p.animate([
+      {transform: "translate3d(-50%,-50%,0) scale(.2)", opacity: 1},
+      {transform: `translate3d(calc(-50% + ${dx}px),calc(-50% + ${dy - 28}px),0) scale(1.15) rotate(${Math.random() * 90 - 45}deg)`, opacity: 1, offset: .52},
+      {transform: `translate3d(calc(-50% + ${dx * 1.2}px),calc(-50% + ${dy + 28}px),0) scale(.3)`, opacity: 0}
+    ], {duration: 820 + Math.random() * 360, easing: "cubic-bezier(.16,1,.3,1)"}).onfinish = () => p.remove();
+  }
+  const ring = document.createElement("span");
+  ring.className = "p tap-ring";
+  ring.style.cssText = `left:${x}px;top:${y}px`;
+  fx.append(ring);
+  ring.animate([
+    {transform: "translate3d(-50%,-50%,0) scale(.2)", opacity: .85},
+    {transform: "translate3d(-50%,-50%,0) scale(2.1)", opacity: 0}
+  ], {duration: 440, easing: "cubic-bezier(.16,1,.3,1)"}).onfinish = () => ring.remove();
+}
+
+let lastTrail = 0;
+function spawnTrail(x, y) {
+  const now = performance.now();
+  if (now - lastTrail < 50) return;
+  lastTrail = now;
+  const s = document.createElement("span");
+  s.className = "p";
+  s.textContent = ["✨", "💖", "🌸", "⭐"][Math.random() * 4 | 0];
+  s.style.cssText = `left:${x}px;top:${y}px;font-size:${10 + Math.random() * 6}px`;
+  fx.append(s);
+  const dx = (Math.random() - 0.5) * 30, dy = 18 + Math.random() * 24;
+  s.animate([
+    {transform: "translate3d(-50%,-50%,0) scale(.4)", opacity: .95},
+    {transform: `translate3d(calc(-50% + ${dx}px),calc(-50% + ${dy}px),0) scale(1) rotate(${Math.random() * 60 - 30}deg)`, opacity: 0}
+  ], {duration: 540, easing: "cubic-bezier(.2,.8,.3,1)"}).onfinish = () => s.remove();
+}
+
+function shards(x, y, cols, n = 18) {
+  for (let i = 0; i < n; i++) {
+    const s = document.createElement("span"), a = Math.random() * 6.283, d = 44 + Math.random() * 75, z = 6 + Math.random() * 7;
+    s.className = "p sh";
+    s.style.cssText = `left:${x}px;top:${y}px;width:${z}px;height:${z * (Math.random() < .5 ? 1 : 1.8)}px;background:${cols[i % cols.length]}`;
+    fx.append(s);
+    s.animate([
+      {transform: "translate3d(-50%,-50%,0) scale(1) rotate(0)", opacity: 1},
+      {transform: `translate3d(calc(-50% + ${Math.cos(a) * d}px),calc(-50% + ${Math.sin(a) * d}px),0) rotate(${Math.random() * 540 - 270}deg)`, opacity: 1, offset: .5},
+      {transform: `translate3d(calc(-50% + ${Math.cos(a) * d * 1.15}px),calc(-50% + ${Math.sin(a) * d + 72}px),0) rotate(${Math.random() * 900 - 450}deg) scale(.3)`, opacity: 0}
+    ], {duration: 820 + Math.random() * 400, easing: "cubic-bezier(.16,1,.3,1)"}).onfinish = () => s.remove();
+  }
+  const r = document.createElement("span");
+  r.className = "p ring2";
+  r.style.cssText = `left:${x}px;top:${y}px`;
+  fx.append(r);
+  r.animate([
+    {transform: "translate3d(-50%,-50%,0) scale(.2)", opacity: .95},
+    {transform: "translate3d(-50%,-50%,0) scale(2.8)", opacity: 0}
+  ], {duration: 460, easing: "cubic-bezier(.16,1,.3,1)"}).onfinish = () => r.remove();
+}
+
+const bgm = $("#bgm"), mb = $("#music");
+let started = false, userPaused = false, wasPlaying = false, AC;
+bgm.volume = 0.6;
+
+function ctx() {
+  const C = window.AudioContext || window.webkitAudioContext;
+  if (!AC && C) AC = new C();
+  if (AC && AC.state === "suspended") AC.resume();
+  return AC;
+}
+function tone(f0, f1, dur, type, vol, delay = 0) {
+  const a = ctx(); if (!a || userPaused) return;
+  const t = a.currentTime + delay, o = a.createOscillator(), g = a.createGain();
+  o.type = type;
+  o.frequency.setValueAtTime(f0, t);
+  o.frequency.exponentialRampToValueAtTime(Math.max(20, f1), t + dur);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(vol, t + 0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g); g.connect(a.destination);
+  o.start(t); o.stop(t + dur + 0.02);
+}
+function puff(dur, vol, cut) {
+  const a = ctx(); if (!a || userPaused) return;
+  const n = a.sampleRate * dur | 0, buf = a.createBuffer(1, n, a.sampleRate), d = buf.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n) ** 2;
+  const s = a.createBufferSource(), f = a.createBiquadFilter(), g = a.createGain();
+  f.type = "lowpass"; f.frequency.value = cut; g.gain.value = vol;
+  s.buffer = buf; s.connect(f); f.connect(g); g.connect(a.destination); s.start();
+}
+const SCALE = [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.5];
+const SFX = {
+  tap(idx) {
+    const n = idx !== undefined ? SCALE[idx % SCALE.length] : SCALE[Math.random() * SCALE.length | 0];
+    tone(n, n * 1.45, 0.15, "sine", 0.15);
+  },
+  boing() { tone(240, 640, 0.22, "sine", 0.26); tone(640, 350, 0.18, "triangle", 0.12, 0.12); },
+  giggle() { [880, 1175, 1047, 1318].forEach((f, i) => tone(f, f * 1.12, 0.08, "triangle", 0.12, i * 0.06)); },
+  pop() { tone(320, 58, 0.15, "sine", 0.55); tone(540, 115, 0.1, "triangle", 0.32); puff(0.08, 0.65, 2500); },
+  chime() { [784, 988, 1175, 1568].forEach((f, i) => tone(f, f * 1.01, 0.52, "sine", 0.11, i * 0.085)); },
+  flip() { puff(0.14, 0.28, 1400); tone(380, 760, 0.22, "sine", 0.12); },
+  close() { tone(660, 310, 0.2, "triangle", 0.14); }
+};
+
+const FX = {
+  jelly(el) {
+    if (window.gsap) {
+      gsap.fromTo(el, {scaleX: 1.22, scaleY: 0.8}, {scaleX: 1, scaleY: 1, duration: 0.85, ease: "elastic.out(1.2, 0.35)"});
+    }
+  },
+  morph(el) {
+    morphBoost = 0.24;
+    FX.jelly(el);
+  },
+  wiggle(el) {
+    if (window.gsap) {
+      gsap.fromTo(el, {rotation: -20, scale: 1.18}, {rotation: 0, scale: 1, duration: 0.9, ease: "elastic.out(1.3, 0.3)"});
+    }
+  },
+  hat(el) {
+    if (window.gsap) {
+      gsap.timeline()
+        .to(el, {y: -26, rotation: -22, scale: 1.18, duration: 0.22, ease: "back.out(2)"})
+        .to(el, {y: 0, rotation: 0, scale: 1, duration: 0.75, ease: "elastic.out(1.2, 0.35)"});
+    }
+  },
+  spin(el) {
+    if (window.gsap) {
+      gsap.fromTo(el, {rotation: 0, scale: 1.25}, {rotation: 360, scale: 1, duration: 0.75, ease: "back.out(1.7)"});
+    }
+  },
+  twinkle(el) {
+    if (window.gsap) {
+      gsap.fromTo(el, {scale: 1.7, rotation: 45}, {scale: 1, rotation: 0, duration: 0.7, ease: "elastic.out(1.2, 0.4)"});
+    }
+  },
+  sway(el) {
+    if (window.gsap) {
+      gsap.fromTo(el, {rotation: 10}, {rotation: 0, duration: 0.9, ease: "elastic.out(1.2, 0.3)"});
+    }
+  },
+  pop(el) {
+    const img = el.firstElementChild;
+    if (window.gsap) {
+      gsap.timeline()
+        .to(img, {scale: 1.38, duration: 0.1, ease: "power2.out"})
+        .to(img, {scale: 0, opacity: 0, duration: 0.12, ease: "power2.in"})
+        .to(img, {scale: 1, opacity: 1, duration: 0.85, delay: 1.1, ease: "elastic.out(1.1, 0.4)"});
+    }
+  }
+};
+const SND = {pop: "pop", jelly: "boing", morph: "boing", wiggle: "giggle", hat: "boing", spin: "giggle", twinkle: "tap", sway: "tap"};
+
+$$("[data-fx]").forEach(el => el.addEventListener("click", e => {
+  e.stopPropagation();
+  const k = el.dataset.fx, r = el.getBoundingClientRect();
+  const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  if (k === "pop") {
+    if (el.dataset.busy) return;
+    el.dataset.busy = 1;
+    setTimeout(() => delete el.dataset.busy, 2100);
+    shards(cx, r.top + r.width * 0.4, [el.dataset.c, "#fff", "#ffe08a", "#1f2d3d"], 20);
+  } else {
+    burst(cx, cy, 10);
+  }
+  FX[k] && FX[k](el);
+  SFX[SND[k] || "tap"]();
+}));
+
+$$(".row b").forEach((b, idx) => {
+  b.addEventListener("pointerdown", e => {
+    e.stopPropagation();
+    const r = b.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, 5);
+    SFX.tap(idx);
+    if (window.gsap) {
+      gsap.fromTo(b.firstElementChild,
+        {y: -18, scaleX: 1.22, scaleY: 0.82, rotation: idx % 2 ? 14 : -14},
+        {y: 0, scaleX: 1, scaleY: 1, rotation: 0, duration: 0.85, ease: "elastic.out(1.3, 0.35)"}
+      );
+    }
+  });
+});
+
+addEventListener("pointerdown", e => {
+  ctx();
+  if (!started && !userPaused && !e.target.closest("#music")) play();
+  if (!e.target.closest("[data-fx],button,.row b")) {
+    burst(e.clientX, e.clientY, 7);
+    SFX.tap();
+  }
+});
+
+addEventListener("pointermove", e => {
+  targetRY = (e.clientX / innerWidth - 0.5) * 22;
+  targetRX = (0.5 - e.clientY / innerHeight) * 22;
+  spawnTrail(e.clientX, e.clientY);
+}, {passive: true});
+
+addEventListener("pointerup", e => {
+  if (e.pointerType !== "mouse") {
+    targetRX = 0; targetRY = 0;
+  }
+}, {passive: true});
+
+addEventListener("deviceorientation", e => {
+  if (e.gamma !== null && e.beta !== null) {
+    targetRY = Math.max(-16, Math.min(16, e.gamma * 0.48));
+    targetRX = Math.max(-16, Math.min(16, (e.beta - 45) * 0.48));
+  }
+}, {passive: true});
+
+const sync = () => mb.classList.toggle("on", !bgm.paused);
+bgm.addEventListener("play", sync);
+bgm.addEventListener("pause", sync);
+const play = () => bgm.play().then(() => { started = true; sync(); }).catch(sync);
+
+mb.addEventListener("click", e => {
+  e.stopPropagation();
+  if (bgm.paused) { userPaused = false; play(); SFX.tap(); }
+  else { SFX.close(); userPaused = true; bgm.pause(); }
+  FX.jelly(mb);
+  const r = mb.getBoundingClientRect();
+  burst(r.left + r.width / 2, r.top + r.height / 2, 7);
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) { wasPlaying = !bgm.paused; bgm.pause(); }
+  else if (wasPlaying && !userPaused) play();
+});
+play();
+
+const ov = $("#overlay"), book = $("#book"), coverLeaf = $("#coverLeaf"), pageShadow = $("#pageShadow"), ltext = $("#ltext");
+const popItems = $$(".pop-item");
+let token = 0, cardTl;
+
+async function openLetter(btn) {
+  const t = ++token, r = btn.getBoundingClientRect();
+  const bx = r.left + r.width / 2, by = r.top + r.height / 2;
+  const dx = bx - innerWidth / 2, dy = by - innerHeight / 2;
+
+  FX.jelly(btn);
+  burst(bx, by, 14);
+  SFX.boing();
+
+  const lt = prep($("#lt"), TITLE), tx = prep(ltext, TEXT);
+  ltext.classList.remove("typing");
+
+  document.body.classList.add("open");
+  ov.setAttribute("aria-hidden", "false");
+
+  if (cardTl) cardTl.kill();
+
+  gsap.set(book, {
+    x: dx,
+    y: dy,
+    z: -420,
+    rotationX: 52,
+    rotationY: -38,
+    rotationZ: -14,
+    scale: 0.18,
+    opacity: 0
+  });
+  gsap.set(coverLeaf, { rotationY: 0 });
+  gsap.set(pageShadow, { opacity: 0.78 });
+  gsap.set("#coverEmblem", { scale: 0.7, rotation: -12 });
+  popItems.forEach(el => {
+    gsap.set(el, { z: 0, scale: 0, rotationX: -45, opacity: 0 });
+  });
+
+  cardTl = gsap.timeline();
+
+  cardTl.to(book, {
+    x: 0,
+    y: 0,
+    z: 0,
+    rotationX: 16,
+    rotationY: -16,
+    rotationZ: -2,
+    scale: 0.92,
+    opacity: 1,
+    duration: 0.72,
+    ease: "back.out(1.35)"
+  })
+  .to("#coverEmblem", {
+    scale: 1.12,
+    rotation: 4,
+    duration: 0.35,
+    ease: "back.out(2)"
+  }, "<0.25")
+  .add(() => {
+    if (t === token) SFX.flip();
+  })
+  .to(coverLeaf, {
+    rotationY: -172,
+    duration: 1.05,
+    ease: "power3.inOut"
+  })
+  .to(book, {
+    rotationX: 0,
+    rotationY: 0,
+    rotationZ: 0,
+    scale: 1,
+    duration: 0.95,
+    ease: "power3.out"
+  }, "<")
+  .to(pageShadow, {
+    opacity: 0,
+    duration: 0.75,
+    ease: "power2.out"
+  }, "<0.2")
+  .add(() => {
+    if (t !== token) return;
+    SFX.chime();
+    burst(innerWidth / 2, innerHeight / 2, 22);
+    popItems.forEach((el, i) => {
+      const targetZ = parseFloat(el.dataset.z || 40);
+      gsap.to(el, {
+        z: targetZ,
+        scale: 1,
+        rotationX: 0,
+        opacity: 1,
+        duration: 0.85,
+        delay: i * 0.08,
+        ease: "elastic.out(1.15, 0.42)"
+      });
+    });
+  }, "-=0.45");
+
+  await sleep(1450);
+  for (const s of lt) {
+    if (t !== token) return;
+    s.classList.add("on");
+    await sleep(65);
+  }
+  await sleep(300);
+  ltext.classList.add("typing");
+  for (const s of tx) {
+    if (t !== token) return;
+    s.classList.add("on");
+    await sleep(/[.,!🎉]/.test(s.textContent) ? 115 : 30);
+  }
+  ltext.classList.remove("typing");
+}
+
+function closeLetter() {
+  if (!document.body.classList.contains("open")) return;
+  const c = ++token;
+  ltext.classList.remove("typing");
+  if (cardTl) cardTl.kill();
+
+  gsap.timeline({
+    onComplete: () => {
+      if (token === c) {
+        document.body.classList.remove("open");
+        ov.setAttribute("aria-hidden", "true");
+        $("#lt").textContent = "";
+        ltext.textContent = "";
+      }
+    }
+  })
+  .to(popItems, {
+    z: 0,
+    scale: 0,
+    opacity: 0,
+    duration: 0.25,
+    stagger: 0.02,
+    ease: "power2.in"
+  })
+  .to(coverLeaf, {
+    rotationY: 0,
+    duration: 0.55,
+    ease: "power3.inOut"
+  }, "<0.05")
+  .to(pageShadow, {
+    opacity: 0.7,
+    duration: 0.4
+  }, "<")
+  .to(book, {
+    y: 60,
+    z: -260,
+    rotationX: 35,
+    rotationY: 20,
+    scale: 0.25,
+    opacity: 0,
+    duration: 0.45,
+    ease: "power3.in"
+  }, "-=0.25");
+}
+
+$("#open").addEventListener("click", e => {
+  e.stopPropagation();
+  openLetter(e.currentTarget);
+});
+
+const shut = e => {
+  if (e) e.stopPropagation();
+  if (document.body.classList.contains("open")) {
+    const r = $("#close").getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, 7);
+    SFX.close();
+    closeLetter();
+  }
+};
+$("#close").addEventListener("click", shut);
+ov.addEventListener("click", e => {
+  if (e.target === ov || e.target.classList.contains("book-stage")) shut(e);
+});
+addEventListener("keydown", e => { if (e.key === "Escape") shut(); });
+
+(async function intro() {
+  const loaded = new Promise(r => document.readyState === "complete" ? r() : addEventListener("load", r));
+  await Promise.race([Promise.all([loaded, document.fonts && document.fonts.ready]), sleep(1800)]);
+  requestAnimationFrame(async () => {
+    document.body.classList.add("go");
+    await sleep(1100);
+    for (const s of prep($("#date"), DATE)) {
+      s.classList.add("on");
+      await sleep(60);
+    }
+  });
+})();
+</script>
+</body>
+</html>
